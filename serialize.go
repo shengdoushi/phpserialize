@@ -149,6 +149,10 @@ func MarshalStruct(input interface{}, options *MarshalOptions) ([]byte, error) {
 	// Some of the fields in the struct may not be visible (unexported). We
 	// need to make sure we count all the visible ones for the final result.
 	visibleFieldCount := 0
+	className := reflect.ValueOf(input).Type().Name()
+	if options.OnlyStdClass {
+		className = "stdClass"
+	}
 
 	var buffer bytes.Buffer
 	for i := 0; i < value.NumField(); i++ {
@@ -176,6 +180,11 @@ func MarshalStruct(input interface{}, options *MarshalOptions) ([]byte, error) {
 		} else if fieldName == "" {
 			fieldName = lowerCaseFirstLetter(typeOfValue.Field(i).Name)
 		}
+		if fieldOptions.Contains("private") {
+			fieldName = "\u0000" + className + "\u0000" + fieldName
+		}else if fieldOptions.Contains("protected") {
+			fieldName = "\u0000*\u0000" + fieldName
+		}
 		buffer.Write(MarshalString(fieldName))
 
 		m, err := Marshal(f.Interface(), options)
@@ -184,11 +193,6 @@ func MarshalStruct(input interface{}, options *MarshalOptions) ([]byte, error) {
 		}
 
 		buffer.Write(m)
-	}
-
-	className := reflect.ValueOf(input).Type().Name()
-	if options.OnlyStdClass {
-		className = "stdClass"
 	}
 
 	return []byte(fmt.Sprintf("O:%d:\"%s\":%d:{%s}", len(className),
