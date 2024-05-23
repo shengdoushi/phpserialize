@@ -1,11 +1,9 @@
-package phpserialize_test
+package phpserialize
 
 import (
 	"errors"
 	"reflect"
 	"testing"
-
-	"github.com/shengdoushi/phpserialize"
 )
 
 func expectErrorToNotHaveOccurred(t *testing.T, err error) {
@@ -45,7 +43,7 @@ func TestUnmarshalInt(t *testing.T) {
 		t.Run(testName, func(t *testing.T) {
 			t.Run("int", func(t *testing.T) {
 				var result int
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -59,7 +57,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("int8", func(t *testing.T) {
 				var result int8
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -73,7 +71,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("int16", func(t *testing.T) {
 				var result int16
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -87,7 +85,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("int32", func(t *testing.T) {
 				var result int32
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -101,7 +99,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("int64", func(t *testing.T) {
 				var result int64
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -115,7 +113,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("uint", func(t *testing.T) {
 				var result uint
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -129,7 +127,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("uint8", func(t *testing.T) {
 				var result uint8
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -143,7 +141,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("uint16", func(t *testing.T) {
 				var result uint16
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -157,7 +155,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("uint32", func(t *testing.T) {
 				var result uint32
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -171,7 +169,7 @@ func TestUnmarshalInt(t *testing.T) {
 
 			t.Run("uint64", func(t *testing.T) {
 				var result uint64
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -204,7 +202,7 @@ func TestUnmarshalFloat(t *testing.T) {
 		t.Run(testName, func(t *testing.T) {
 			t.Run("float32", func(t *testing.T) {
 				var result float32
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -218,7 +216,7 @@ func TestUnmarshalFloat(t *testing.T) {
 
 			t.Run("float64", func(t *testing.T) {
 				var result float64
-				err := phpserialize.Unmarshal(test.input, &result)
+				err := Unmarshal(test.input, &result)
 
 				if test.expectedError == nil {
 					expectErrorToNotHaveOccurred(t, err)
@@ -253,7 +251,7 @@ func TestUnmarshalString(t *testing.T) {
 	for testName, test := range tests {
 		t.Run(testName, func(t *testing.T) {
 			var result string
-			err := phpserialize.Unmarshal(test.input, &result)
+			err := Unmarshal(test.input, &result)
 
 			if test.expectedError == nil {
 				expectErrorToNotHaveOccurred(t, err)
@@ -284,7 +282,7 @@ func TestUnmarshalBinary(t *testing.T) {
 	for testName, test := range tests {
 		t.Run(testName, func(t *testing.T) {
 			var result []byte
-			err := phpserialize.Unmarshal(test.input, &result)
+			err := Unmarshal(test.input, &result)
 
 			if test.expectedError == nil {
 				expectErrorToNotHaveOccurred(t, err)
@@ -384,7 +382,7 @@ func TestUnmarshalArray(t *testing.T) {
 	for testName, test := range tests {
 		t.Run(testName, func(t *testing.T) {
 			var result []interface{}
-			err := phpserialize.Unmarshal(test.input, &result)
+			err := Unmarshal(test.input, &result)
 
 			if test.expectedError == nil {
 				expectErrorToNotHaveOccurred(t, err)
@@ -442,7 +440,7 @@ func TestUnmarshalAssociativeArray(t *testing.T) {
 	for testName, test := range tests {
 		t.Run(testName, func(t *testing.T) {
 			result := make(map[interface{}]interface{})
-			err := phpserialize.Unmarshal(test.input, &result)
+			err := Unmarshal(test.input, &result)
 
 			if test.expectedError == nil {
 				expectErrorToNotHaveOccurred(t, err)
@@ -462,7 +460,7 @@ var inputBoolTrue = []byte("b:1;")
 
 func TestUnmarshalWithNull(t *testing.T) {
 	result := interface{}(nil)
-	err := phpserialize.Unmarshal(inputNull, &result)
+	err := Unmarshal(inputNull, &result)
 
 	if err == nil {
 		t.Errorf("expected error")
@@ -470,14 +468,14 @@ func TestUnmarshalWithNull(t *testing.T) {
 }
 
 func TestUnmarshalNilWithNull(t *testing.T) {
-	err := phpserialize.UnmarshalNil(inputNull)
+	err := UnmarshalNil(inputNull)
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestBadUnmarshalNilWithNull(t *testing.T) {
-	err := phpserialize.UnmarshalNil(inputBoolFalse)
+	err := UnmarshalNil(inputBoolFalse)
 	if err == nil {
 		t.Errorf("expected error")
 	}
@@ -485,7 +483,7 @@ func TestBadUnmarshalNilWithNull(t *testing.T) {
 
 func TestUnmarshalWithBooleanTrue(t *testing.T) {
 	var result bool
-	err := phpserialize.Unmarshal(inputBoolTrue, &result)
+	err := Unmarshal(inputBoolTrue, &result)
 
 	if result != true {
 		t.Errorf("expected true")
@@ -498,7 +496,7 @@ func TestUnmarshalWithBooleanTrue(t *testing.T) {
 func TestUnmarshalObject(t *testing.T) {
 	data := "O:7:\"struct1\":3:{s:3:\"foo\";i:10;s:3:\"bar\";O:7:\"Struct2\":1:{s:3:\"qux\";d:1.23;}s:3:\"baz\";s:3:\"yay\";}"
 	var result struct1
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	if result.Foo != 10 {
@@ -517,7 +515,7 @@ func TestUnmarshalObject(t *testing.T) {
 func TestUnmarshalObjectWithTags(t *testing.T) {
 	data := "O:7:\"struct1\":3:{s:3:\"foo\";i:10;s:3:\"bar\";O:7:\"Struct2\":1:{s:3:\"qux\";d:1.23;}s:3:\"baz\";s:3:\"yay\";}"
 	var result structTag
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	if result.Bar != 10 {
@@ -551,7 +549,7 @@ func TestUnmarshalPointers(t *testing.T) {
 	}
 
 	var result Nillable
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	if result.Foo != target.Foo {
@@ -585,7 +583,7 @@ func TestUnmarshalPointersWithNull(t *testing.T) {
 	}
 
 	var result Nillable
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	if result.Foo != target.Foo {
@@ -608,7 +606,7 @@ func TestUnmarshalPointersWithNull(t *testing.T) {
 func TestUnmarshalObjectIntoMap(t *testing.T) {
 	data := "O:7:\"struct1\":3:{s:3:\"foo\";i:10;s:3:\"bar\";O:7:\"Struct2\":1:{s:3:\"qux\";d:1.23;}s:3:\"baz\";s:3:\"yay\";}"
 	var result map[interface{}]interface{}
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	expected := map[interface{}]interface{}{
@@ -627,7 +625,7 @@ func TestUnmarshalObjectIntoMap(t *testing.T) {
 func TestUnmarshalObjectIntoMapContainingArray(t *testing.T) {
 	data := "O:7:\"struct1\":3:{s:3:\"foo\";i:10;s:3:\"bar\";a:3:{i:0;i:7;i:1;i:8;i:2;i:9;}s:3:\"baz\";s:3:\"yay\";}"
 	var result map[interface{}]interface{}
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	expected := map[interface{}]interface{}{
@@ -644,7 +642,7 @@ func TestUnmarshalObjectIntoMapContainingArray(t *testing.T) {
 func TestUnmarshalArrayThatContainsObject(t *testing.T) {
 	data := "a:3:{i:0;O:7:\"struct1\":2:{s:3:\"foo\";i:10;s:3:\"baz\";s:3:\"yay\";}i:1;i:8;i:2;i:9;}"
 	var result []interface{}
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	expected := []interface{}{
@@ -665,7 +663,7 @@ func TestUnmarshalArrayThatContainsObject(t *testing.T) {
 func TestUnmarshalArrayThatContainsInteger(t *testing.T) {
 	data := `a:3:{s:4:"name";s:2:"tw";s:3:"age";i:123;s:4:"wife";a:1:{s:1:"x";s:1:"y";}}`
 	var result map[interface{}]interface{}
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	expected := map[interface{}]interface{}{
@@ -684,7 +682,7 @@ func TestUnmarshalArrayThatContainsInteger(t *testing.T) {
 func TestUnmarshalObjectThatContainsArray(t *testing.T) {
 	data := "O:7:\"Struct3\":4:{s:11:\"objectArray\";a:2:{i:0;O:7:\"Struct2\":1:{s:3:\"qux\";d:1.1;}i:1;O:7:\"Struct2\":1:{s:3:\"qux\";d:2.2;}}s:8:\"intArray\";a:2:{i:0;i:1;i:1;i:2;}s:10:\"floatArray\";a:2:{i:0;d:1;i:1;d:2;}s:11:\"stringArray\";a:2:{i:0;s:1:\"a\";i:1;s:1:\"b\";}}"
 	var result Struct3
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	if len(result.ObjectArray) == 0 {
@@ -705,7 +703,7 @@ func TestUnmarshalObjectThatContainsArray(t *testing.T) {
 func TestUnmarshalMultibyte(t *testing.T) {
 	data := `a:3:{i:0;a:2:{i:0;s:6:"白色";i:1;s:6:"黑色";}i:1;a:3:{i:0;s:3:"大";i:1;s:3:"中";i:2;s:3:"小";}i:2;a:2:{i:0;s:3:"女";i:1;s:3:"男";}}`
 	var result map[interface{}]interface{}
-	err := phpserialize.Unmarshal([]byte(data), &result)
+	err := Unmarshal([]byte(data), &result)
 	expectErrorToNotHaveOccurred(t, err)
 
 	expected := map[interface{}]interface{}{
@@ -749,7 +747,7 @@ func TestUnmarshalEscape(t *testing.T) {
 	for testName, test := range escapeTests {
 		t.Run(testName, func(t *testing.T) {
 			var result string
-			err := phpserialize.Unmarshal([]byte(test.Serialized), &result)
+			err := Unmarshal([]byte(test.Serialized), &result)
 			expectErrorToNotHaveOccurred(t, err)
 
 			if test.Unserialized != result {

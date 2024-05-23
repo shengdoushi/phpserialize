@@ -1,14 +1,13 @@
-package phpserialize_test
+package phpserialize
 
 import (
-	"github.com/shegndoushi/phpserialize"
 	"reflect"
 	"testing"
 )
 
 func TestStringifyKeysOnEmptyMap(t *testing.T) {
 	m := map[interface{}]interface{}{}
-	result := phpserialize.StringifyKeys(m)
+	result := StringifyKeys(m)
 	expected := map[string]interface{}{}
 
 	if !reflect.DeepEqual(result, expected) {
@@ -21,7 +20,7 @@ func TestStringifyKeysOnMapWithEntries(t *testing.T) {
 		"foo": "bar",
 		"baz": 123,
 	}
-	result := phpserialize.StringifyKeys(m)
+	result := StringifyKeys(m)
 	expected := map[string]interface{}{
 		"foo": "bar",
 		"baz": 123,
@@ -40,7 +39,7 @@ func TestStringifyKeysOnMapWithEntriesRecursively(t *testing.T) {
 		},
 		"baz": 123,
 	}
-	result := phpserialize.StringifyKeys(m)
+	result := StringifyKeys(m)
 	expected := map[string]interface{}{
 		"foo": map[string]interface{}{
 			"foo": "bar",
@@ -65,7 +64,7 @@ func TestStringifyKeysOnMapRecursivelyMovesThroughSlices(t *testing.T) {
 		},
 		"baz": 123,
 	}
-	result := phpserialize.StringifyKeys(m)
+	result := StringifyKeys(m)
 	expected := map[string]interface{}{
 		"foo": []interface{}{
 			map[string]interface{}{

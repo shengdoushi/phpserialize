@@ -1,7 +1,6 @@
-package phpserialize_test
+package phpserialize
 
 import (
-	"github.com/shengdoushi/phpserialize"
 	"reflect"
 	"testing"
 )
@@ -47,11 +46,11 @@ type Nillable struct {
 type marshalTest struct {
 	input   interface{}
 	output  []byte
-	options *phpserialize.MarshalOptions
+	options *MarshalOptions
 }
 
-func getStdClassOnly() *phpserialize.MarshalOptions {
-	stdClassOnly := phpserialize.DefaultMarshalOptions()
+func getStdClassOnly() *MarshalOptions {
+	stdClassOnly := DefaultMarshalOptions()
 	stdClassOnly.OnlyStdClass = true
 
 	return stdClassOnly
@@ -196,10 +195,10 @@ func TestMarshal(t *testing.T) {
 	for testName, test := range marshalTests {
 		t.Run(testName, func(t *testing.T) {
 			if test.options == nil {
-				test.options = phpserialize.DefaultMarshalOptions()
+				test.options = DefaultMarshalOptions()
 			}
 
-			result, err := phpserialize.Marshal(test.input, test.options)
+			result, err := Marshal(test.input, test.options)
 			if err != nil {
 				t.Error(err)
 			}
@@ -213,8 +212,8 @@ func TestMarshal(t *testing.T) {
 }
 
 func TestMarshalFail(t *testing.T) {
-	options := phpserialize.DefaultMarshalOptions()
-	result, err := phpserialize.Marshal(uintptr(13), options)
+	options := DefaultMarshalOptions()
+	result, err := Marshal(uintptr(13), options)
 	if err == nil {
 		t.Error("expected error to occur")
 	}
@@ -229,8 +228,8 @@ func TestMarshalFail(t *testing.T) {
 func TestMarshalEscape(t *testing.T) {
 	for testName, test := range escapeTests {
 		t.Run(testName, func(t *testing.T) {
-			options := phpserialize.DefaultMarshalOptions()
-			result, err := phpserialize.Marshal(test.Unserialized, options)
+			options := DefaultMarshalOptions()
+			result, err := Marshal(test.Unserialized, options)
 			expectErrorToNotHaveOccurred(t, err)
 
 			if test.Serialized != string(result) {
