@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/elliotchance/phpserialize"
+	"github.com/shengdoushi/phpserialize"
 )
 
 func expectErrorToNotHaveOccurred(t *testing.T, err error) {

@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/elliotchance/phpserialize.svg?branch=master)](https://travis-ci.org/elliotchance/phpserialize)
 
 PHP [serialize()](http://php.net/manual/en/function.serialize.php) and
 [unserialize()](http://php.net/manual/en/function.unserialize.php) for Go.
@@ -20,7 +19,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/elliotchance/phpserialize"
+	"github.com/shengdoushi/phpserialize"
 )
 
 func main() {
@@ -45,7 +44,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/elliotchance/phpserialize"
+	"github.com/shengdoushi/phpserialize"
 )
 
 type MyStruct struct {
