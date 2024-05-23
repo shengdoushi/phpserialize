@@ -3,13 +3,15 @@
 PHP [serialize()](http://php.net/manual/en/function.serialize.php) and
 [unserialize()](http://php.net/manual/en/function.unserialize.php) for Go.
 
+Implementaion for https://www.phpinternalsbook.com/php5/classes_objects/serialization.html
+
+Fork From [elliotchance/phpserialize](https://github.com/elliotchance/phpserialize)
+
 # Install / Update
 
 ```bash
-go get -u github.com/elliotchance/phpserialize
+go get -u github.com/shengdoushi/phpserialize
 ```
-
-`phpserialize` requires Go 1.8+.
 
 # Example
 
@@ -53,6 +55,10 @@ type MyStruct struct {
 	MyMotto *string `php:"my_motto,omitnilptr"`
 	// Will not be marshalled
 	MySecret string `php:"-"`
+	// private  
+	PrivateVar string `php:"privateVar,private"`
+	// protected
+	ProtectedVar string `php:"protectedVar,protected"`
 }
 
 func main() {
