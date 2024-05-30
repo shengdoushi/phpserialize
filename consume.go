@@ -4,6 +4,7 @@ import (
 	"errors"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 // The internal consume functions work as the parser/lexer when reading
@@ -143,6 +144,13 @@ func consumeObjectAsMap(data []byte, offset int) (
 			return nil, -1, err
 		}
 
+		// unwrap
+		if strings.HasPrefix(key, "\u0000") {
+			if pos := strings.Index(key[1:], "\u0000"); pos != -1 {
+				key = key[pos+2:]
+			}
+		}
+
 		// If the next item is an object we can't simply consume it,
 		// rather we send the reflect.Value back through consumeObject
 		// so the recursion can be handled correctly.
@@ -239,7 +247,7 @@ func fillStruct(obj reflect.Value, m map[interface{}]interface{}) error {
 		if tag := tt.Field(i).Tag.Get("php"); tag == "-" {
 			continue
 		} else if tag != "" {
-			key = tag
+			key = strings.SplitN(tag, ",", 2)[0]
 		} else {
 			key = lowerCaseFirstLetter(tt.Field(i).Name)
 		}
